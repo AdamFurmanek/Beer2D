@@ -5,21 +5,27 @@ using UnityEngine;
 [System.Serializable]
 public class ParticleParameters
 {
-    public Color color;
-    public Vector2 scale;
-    public float gravityScale;
-    public float linearDrag;
-    public float angularDrag;
+    public bool canFoam;
+    public float foamAppearingTime;
+    public float foamStayTime;
+    public float foamDissolveTime;
+
+    public bool canDiffuse;
+    public float diffusingTime;
+    public float diffuseIntensity;
 
     public static ParticleParameters Lerp(ParticleParameters a, ParticleParameters b, float t)
     {
         return new ParticleParameters()
         {
-            color = Color.Lerp(a.color, b.color, t),
-            scale = Vector2.Lerp(a.scale, b.scale, t),
-            gravityScale = Mathf.Lerp(a.gravityScale, b.gravityScale, t),
-            linearDrag = Mathf.Lerp(a.linearDrag, b.linearDrag, t),
-            angularDrag = Mathf.Lerp(a.angularDrag, b.angularDrag, t),
+            canFoam = a.canFoam,
+            foamAppearingTime = Mathf.Lerp(a.foamAppearingTime, b.foamAppearingTime, t),
+            foamStayTime = Mathf.Lerp(a.foamStayTime, b.foamStayTime, t),
+            foamDissolveTime = Mathf.Lerp(a.foamDissolveTime, b.foamDissolveTime, t),
+
+            canDiffuse = a.canDiffuse,
+            diffusingTime = Mathf.Lerp(a.diffusingTime, b.diffusingTime, t),
+            diffuseIntensity = a.diffuseIntensity + (b.diffuseIntensity - a.diffuseIntensity) / 4, //special diffusing of intensity
         };
     }
 
@@ -32,11 +38,14 @@ public class ParticleParameters
     {
         return new ParticleParameters()
         {
-            color = new Color(p.color.r, p.color.g, p.color.b, p.color.a ),
-            scale = new Vector2(p.scale.x, p.scale.y),
-            gravityScale = p.gravityScale,
-            linearDrag = p.linearDrag,
-            angularDrag = p.angularDrag
+            canFoam = p.canFoam,
+            foamAppearingTime = p.foamAppearingTime,
+            foamStayTime = p.foamStayTime,
+            foamDissolveTime = p.foamDissolveTime,
+
+            canDiffuse = p.canDiffuse,
+            diffusingTime = p.diffusingTime,
+            diffuseIntensity = p.diffuseIntensity,
         };
     }
 }

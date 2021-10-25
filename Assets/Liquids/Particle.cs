@@ -6,22 +6,23 @@ public class Particle : MonoBehaviour
 {
     SpriteRenderer particleRenderer;
     Rigidbody2D particleRigidbody;
-    public ParticleParameters liquidParameters;
-    public ParticleParameters foamParameters;
+    public ParticleAppearance liquid;
+    public ParticleAppearance foam;
+
+    public ParticleParameters parameters;
 
     bool isFoam = false;
     bool diffusing = false;
 
     private void Awake()
     {
-        
         particleRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         particleRigidbody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(ParticleCRT());
     }
 
-    private void SetParameters(ParticleParameters p)
+    private void SetParameters(ParticleAppearance p)
     {
         particleRenderer.color = p.color;
         transform.localScale = p.scale;
@@ -32,7 +33,7 @@ public class Particle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.relativeVelocity.sqrMagnitude > 1000 && !isFoam)
+        if(collision.relativeVelocity.sqrMagnitude > 1000 && parameters.canFoam && !isFoam)
         {
             isFoam = true;
         }
@@ -61,54 +62,68 @@ public class Particle : MonoBehaviour
 
     private IEnumerator Liquid()
     {
-        SetParameters(liquidParameters);
+        SetParameters(liquid);
         yield return null;
     }
 
     private IEnumerator Foam()
     {
         float t = 0;
-        while(t < 1)
-        {
-            SetParameters(ParticleParameters.Lerp(liquidParameters, foamParameters, t));
+        float appearingTime = parameters.foamAppearingTime;
+        float stayTime = parameters.foamStayTime;
+        float dissolveTime = parameters.foamDissolveTime;
 
-            t += Time.deltaTime / 1;
+        while (t < 1)
+        {
+            SetParameters(ParticleAppearance.Lerp(liquid, foam, t));
+
+            t += Time.deltaTime / appearingTime;
             yield return null;
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(stayTime);
 
         t = 0;
         while (t < 1)
         {
-            SetParameters(ParticleParameters.Lerp(foamParameters, liquidParameters, t));
+            SetParameters(ParticleAppearance.Lerp(foam, liquid, t));
 
-            t += Time.deltaTime / 1;
+            t += Time.deltaTime / dissolveTime;
             yield return null;
         }
     }
 
     private IEnumerator Diffuse(Particle other)
     {
+        if (!parameters.canDiffuse || !other.parameters.canDiffuse)
+            yield break;
+
         diffusing = true;
 
-        ParticleParameters liquidOriginal = ParticleParameters.Copy(liquidParameters);
-        ParticleParameters liquidDestination = ParticleParameters.Combine(liquidParameters, other.liquidParameters);
+        ParticleAppearance originalLiquid = ParticleAppearance.Copy(liquid);
+        ParticleAppearance destinationLiquid = ParticleAppearance.Lerp(liquid, other.liquid, parameters.diffuseIntensity);
 
-        ParticleParameters foamOriginal = ParticleParameters.Copy(foamParameters);
-        ParticleParameters foamDestination = ParticleParameters.Combine(foamParameters, other.foamParameters);
+        ParticleAppearance originalFoam = ParticleAppearance.Copy(foam);
+        ParticleAppearance destinationFoam = ParticleAppearance.Lerp(foam, other.foam, parameters.diffuseIntensity);
+
+        ParticleParameters originalParameters = ParticleParameters.Copy(parameters);
+        ParticleParameters destinationParameters = ParticleParameters.Lerp(parameters, other.parameters, parameters.diffuseIntensity);
 
         float t = 0;
+        float diffusingTime = parameters.diffusingTime;
         while(t < 1)
         {
-            liquidParameters = ParticleParameters.Lerp(liquidOriginal, liquidDestination, t);
+            liquid = ParticleAppearance.Lerp(originalLiquid, destinationLiquid, t);
 
-            foamParameters = ParticleParameters.Lerp(foamOriginal, foamDestination, t);
+            foam = ParticleAppearance.Lerp(originalFoam, destinationFoam, t);
 
-            t += Time.deltaTime / 0.1f;
+            parameters = ParticleParameters.Lerp(originalParameters, destinationParameters, t);
+
+            t += Time.deltaTime / diffusingTime;
             yield return null;
         }
 
         diffusing = false;
     }
+
 }
