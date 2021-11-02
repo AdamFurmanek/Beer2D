@@ -7,16 +7,18 @@ public class DraggingBorder : MonoBehaviour
     public float scrollingSpeed;
 
     DraggingObject mainObject;
+    AudioSource hitAudio;
     SpriteRenderer spriteRenderer;
     [HideInInspector] public bool dragging;
     [HideInInspector] public Vector2 offset;
     Vector2 lastPosition;
     Quaternion lastRotation;
-    int triggers;
+    public GameObject trigger;
 
     private void Awake()
     {
         mainObject = transform.parent.GetComponentInChildren<DraggingObject>();
+        hitAudio = GetComponent<AudioSource>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         lastPosition = transform.position;
         lastRotation = transform.rotation;
@@ -25,14 +27,28 @@ public class DraggingBorder : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("DishBorder"))
-            triggers++;
+            trigger = collision.gameObject;
+    }
+
+    bool stoppedFlag;
+
+
+    public void Update()
+    {
+        if (dragging)
+        {
+            if (Input.mouseScrollDelta.y > 0)
+                transform.Rotate(0, 0, scrollingSpeed);
+            if (Input.mouseScrollDelta.y < 0)
+                transform.Rotate(0, 0, -scrollingSpeed);
+        }
     }
 
     private void FixedUpdate()
     {
         if (dragging)
         {
-            if(triggers == 0)
+            if(trigger == null)
             {
                 spriteRenderer.enabled = false;
 
@@ -41,25 +57,29 @@ public class DraggingBorder : MonoBehaviour
 
                 lastPosition = transform.position;
                 lastRotation = transform.rotation;
+                stoppedFlag = true;
             }
             else
             {
+                if (stoppedFlag)
+                {
+                    hitAudio.Play();
+                    var triggerHitAudio = trigger.GetComponent<AudioSource>();
+                    if (triggerHitAudio != null)
+                        triggerHitAudio.Play();
+                    stoppedFlag = false;
+                }
                 spriteRenderer.enabled = true;
 
                 lastPosition = mainObject.transform.position;
                 lastRotation = mainObject.transform.rotation;
             }
 
-            if (Input.mouseScrollDelta.y > 0)
-                transform.Rotate(0, 0, scrollingSpeed);
-            if (Input.mouseScrollDelta.y < 0)
-                transform.Rotate(0, 0, -scrollingSpeed);
-
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition - offset;
             transform.position += new Vector3(0, 0, 5);
 
-            triggers = 0;
+            trigger = null;
         }
     }
 }

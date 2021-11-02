@@ -11,11 +11,24 @@ public class Dispenser : MonoBehaviour
     public float frequency;
 
     private bool busy;
+    private AudioSource pouring;
+
+    private void Awake()
+    {
+        pouring = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
-        if (enable && Input.GetKey(KeyCode.Space) && !busy)
-            StartCoroutine(Pour());
+        pouring.volume -= Time.deltaTime;
+        if(enable && Input.GetKey(KeyCode.Space))
+        {
+            pouring.volume += Time.deltaTime * 2;
+            pouring.volume = Mathf.Min(0.5f, pouring.volume);
+            if (!busy)
+                StartCoroutine(Pour());
+        }
+
     }
 
     IEnumerator Pour()
