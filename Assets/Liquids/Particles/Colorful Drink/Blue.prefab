@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4199286387117001523}
   - component: {fileID: 7425827621883224921}
   m_Layer: 2
-  m_Name: BeerParticle
+  m_Name: Blue
   m_TagString: Liquid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,22 +85,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liquid:
-    color: {r: 0.9803922, g: 0.69411767, b: 0.10980393, a: 1}
+    color: {r: 0, g: 0.3019608, b: 1, a: 1}
     scale: {x: 1, y: 1}
     gravityScale: 5
-    linearDrag: 0
-    angularDrag: 0
+    linearDrag: 0.3
+    angularDrag: 0.3
   foam:
-    color: {r: 1, g: 1, b: 1, a: 1}
-    scale: {x: 2, y: 2}
-    gravityScale: 2
-    linearDrag: 0
-    angularDrag: 0
+    color: {r: 0, g: 0.3019608, b: 1, a: 1}
+    scale: {x: 1, y: 1}
+    gravityScale: 4
+    linearDrag: 0.3
+    angularDrag: 0.3
   parameters:
     canFoam: 1
-    foamAppearingTime: 1
-    foamStayTime: 2
-    foamDissolveTime: 3
+    foamAppearingTime: 0.1
+    foamStayTime: 0.1
+    foamDissolveTime: 0.1
     canDiffuse: 1
     diffusingTime: 0.1
     diffuseIntensity: 0.5
@@ -258,7 +258,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 622cf727c33d99a4aaec116702e10aae, type: 3}
-  m_Color: {r: 0.98039216, g: 0.69411767, b: 0.10980392, a: 1}
+  m_Color: {r: 0, g: 0.3019608, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

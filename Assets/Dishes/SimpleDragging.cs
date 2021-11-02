@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dragging : MonoBehaviour
+public class SimpleDragging : MonoBehaviour
 {
     public float scrollingSpeed;
-    Vector2 offset;
+
+    [HideInInspector] public bool dragging;
+    [HideInInspector] public Vector2 offset;
 
     public void OnMouseDown()
     {

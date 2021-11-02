@@ -20,11 +20,13 @@ public class Parenting : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.transform.SetParent(specialParent.transform);
+        if (collision.CompareTag("Liquid"))
+            collision.transform.SetParent(specialParent.transform);
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        collision.transform.SetParent(defaultParent.transform);
+        if (collision.CompareTag("Liquid"))
+            collision.transform.SetParent(defaultParent.transform);
     }
 }
