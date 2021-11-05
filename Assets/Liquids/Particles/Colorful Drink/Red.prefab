@@ -85,13 +85,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liquid:
-    color: {r: 0.8941177, g: 0.011764707, b: 0.011764707, a: 1}
+    color: {r: 0.8941177, g: 0.011764707, b: 0.011764707, a: 0.627451}
     scale: {x: 1, y: 1}
     gravityScale: 5
     linearDrag: 0.3
     angularDrag: 0.3
   foam:
-    color: {r: 0.8941177, g: 0.011764707, b: 0.011764707, a: 1}
+    color: {r: 0.8941177, g: 0.011764707, b: 0.011764707, a: 0.627451}
     scale: {x: 1, y: 1}
     gravityScale: 4
     linearDrag: 0.3
@@ -101,9 +101,11 @@ MonoBehaviour:
     foamAppearingTime: 0.1
     foamStayTime: 0.1
     foamDissolveTime: 0.1
+    foamVolume: 0
     canDiffuse: 1
     diffusingTime: 0.1
     diffuseIntensity: 0.5
+  isFoam: 0
 --- !u!1 &6138063561786391118
 GameObject:
   m_ObjectHideFlags: 0

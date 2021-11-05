@@ -9,6 +9,7 @@ public class ParticleParameters
     public float foamAppearingTime;
     public float foamStayTime;
     public float foamDissolveTime;
+    public float foamVolume;
 
     public bool canDiffuse;
     public float diffusingTime;
@@ -22,6 +23,7 @@ public class ParticleParameters
             foamAppearingTime = Mathf.Lerp(a.foamAppearingTime, b.foamAppearingTime, t),
             foamStayTime = Mathf.Lerp(a.foamStayTime, b.foamStayTime, t),
             foamDissolveTime = Mathf.Lerp(a.foamDissolveTime, b.foamDissolveTime, t),
+            foamVolume = Mathf.Lerp(a.foamVolume, b.foamVolume, t),
 
             canDiffuse = a.canDiffuse,
             diffusingTime = Mathf.Lerp(a.diffusingTime, b.diffusingTime, t),
@@ -42,6 +44,7 @@ public class ParticleParameters
             foamAppearingTime = p.foamAppearingTime,
             foamStayTime = p.foamStayTime,
             foamDissolveTime = p.foamDissolveTime,
+            foamVolume = p.foamVolume,
 
             canDiffuse = p.canDiffuse,
             diffusingTime = p.diffusingTime,

@@ -43,10 +43,6 @@ public class DraggingBorder : MonoBehaviour
                 toScroll = scrollingSpeed;
             if (Input.mouseScrollDelta.y < 0)
                 toScroll = -scrollingSpeed;
-
-            var distance = Vector2.Distance(lastPosition, transform.position);
-            if (distance > movingSpeedAudioTrigger && !moveAudio.isPlaying)
-                moveAudio.Play();
         }
     }
 
@@ -59,6 +55,10 @@ public class DraggingBorder : MonoBehaviour
         {
             if(trigger == null)
             {
+                var distance = Vector2.Distance(lastPosition, transform.position);
+                if (distance > movingSpeedAudioTrigger && !moveAudio.isPlaying)
+                    moveAudio.Play();
+
                 spriteRenderer.enabled = false;
 
                 mainObject.transform.position = lastPosition;

@@ -19,8 +19,19 @@ public class DraggingObject : MonoBehaviour
 
     private void Update()
     {
-        float foamParticles = (float)GetComponentsInChildren<Particle>().Count(particle => particle.isFoam) / 100 * maxFoamingVolume;
+        int count = 0;
+        float intensity = 0;
+        foreach(var foam in GetComponentsInChildren<Particle>())
+        {
+            if (foam.isFoam)
+            {
+                count++;
+                intensity += foam.parameters.foamVolume;
+            }
+        }
+        float foamParticles = intensity / 100 * maxFoamingVolume;
         foamAudio.volume = Mathf.Min(maxFoamingVolume, foamParticles);
+        Debug.Log(foamAudio.volume);
     }
 
     public void OnMouseDown()
