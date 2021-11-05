@@ -32,20 +32,23 @@ public class DraggingBorder : MonoBehaviour
 
     bool stoppedFlag;
 
-
+    float toScroll;
     public void Update()
     {
         if (dragging)
         {
             if (Input.mouseScrollDelta.y > 0)
-                transform.Rotate(0, 0, scrollingSpeed);
+                toScroll = scrollingSpeed;
             if (Input.mouseScrollDelta.y < 0)
-                transform.Rotate(0, 0, -scrollingSpeed);
+                toScroll = -scrollingSpeed;
         }
     }
 
     private void FixedUpdate()
     {
+        transform.Rotate(0, 0, toScroll);
+        toScroll = 0;
+
         if (dragging)
         {
             if(trigger == null)
@@ -64,9 +67,6 @@ public class DraggingBorder : MonoBehaviour
                 if (stoppedFlag)
                 {
                     hitAudio.Play();
-                    var triggerHitAudio = trigger.GetComponent<AudioSource>();
-                    if (triggerHitAudio != null)
-                        triggerHitAudio.Play();
                     stoppedFlag = false;
                 }
                 spriteRenderer.enabled = true;

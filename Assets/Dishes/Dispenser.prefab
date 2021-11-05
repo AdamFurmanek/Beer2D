@@ -48,3 +48,4 @@ MonoBehaviour:
   enable: 1
   force: 30
   frequency: 100
+  maxAudioVolume: 0.5

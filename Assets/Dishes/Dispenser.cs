@@ -9,6 +9,7 @@ public class Dispenser : MonoBehaviour
     public bool enable;
     public float force;
     public float frequency;
+    public float maxAudioVolume;
 
     private bool busy;
     private AudioSource pouring;
@@ -24,11 +25,10 @@ public class Dispenser : MonoBehaviour
         if(enable && Input.GetKey(KeyCode.Space))
         {
             pouring.volume += Time.deltaTime * 2;
-            pouring.volume = Mathf.Min(0.5f, pouring.volume);
+            pouring.volume = Mathf.Min(maxAudioVolume, pouring.volume);
             if (!busy)
                 StartCoroutine(Pour());
         }
-
     }
 
     IEnumerator Pour()

@@ -122,27 +122,6 @@ PolygonCollider2D:
       - {x: 0.36849254, y: 2.7194257}
       - {x: 0.34818506, y: 2.838824}
       - {x: 0.31572872, y: 2.863909}
-      - {x: 0.2595796, y: 2.8407311}
-      - {x: 0.24812983, y: 2.7522635}
-      - {x: 0.29859602, y: 2.5603302}
-      - {x: 0.26827714, y: 2.4343438}
-      - {x: 0.25261644, y: 1.3361527}
-      - {x: 0.33833727, y: 1.1817007}
-      - {x: 0.54399073, y: 1.0420222}
-      - {x: 0.674124, y: 0.8518451}
-      - {x: 0.7494644, y: 0.69005734}
-      - {x: 0.7696289, y: -2.8281758}
-      - {x: -0.74984956, y: -2.8094146}
-      - {x: -0.74640244, y: 0.71873236}
-      - {x: -0.6838911, y: 0.85381645}
-      - {x: -0.54074836, y: 0.9937052}
-      - {x: -0.37338936, y: 1.1213249}
-      - {x: -0.25309795, y: 1.2568983}
-      - {x: -0.2022887, y: 1.3711866}
-      - {x: -0.21439613, y: 2.3032086}
-      - {x: -0.2361288, y: 2.6267533}
-      - {x: -0.19890817, y: 2.7809737}
-      - {x: -0.22316566, y: 2.847751}
       - {x: -0.26546812, y: 2.8554168}
       - {x: -0.30993554, y: 2.8319411}
       - {x: -0.32967106, y: 2.7360783}
@@ -193,6 +172,7 @@ MonoBehaviour:
   scrollingSpeed: 10
   dragging: 0
   offset: {x: 0, y: 0}
+  trigger: {fileID: 0}
 --- !u!82 &549404807
 AudioSource:
   m_ObjectHideFlags: 0
@@ -365,6 +345,7 @@ GameObject:
   - component: {fileID: 5518964330399863002}
   - component: {fileID: 5518964330399862980}
   - component: {fileID: 5518964330399863001}
+  - component: {fileID: 492264741}
   m_Layer: 0
   m_Name: Object
   m_TagString: Dish
@@ -534,31 +515,31 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.86704785, y: -0.7690704}
-      - {x: 0.8569643, y: 0.71082026}
-      - {x: 0.7562977, y: 0.918834}
-      - {x: 0.63883567, y: 1.0865092}
-      - {x: 0.39051086, y: 1.2831944}
-      - {x: 0.36637467, y: 1.3834089}
-      - {x: 0.3844375, y: 2.4502108}
-      - {x: 0.39992085, y: 2.5891006}
-      - {x: 0.36849254, y: 2.7194257}
-      - {x: 0.34818506, y: 2.838824}
+    - - {x: 0.82079756, y: -0.82819146}
+      - {x: 0.80461735, y: 0.61959887}
+      - {x: 0.75647885, y: 0.8162497}
+      - {x: 0.5911337, y: 1.058851}
+      - {x: 0.37229687, y: 1.2288435}
+      - {x: 0.31219906, y: 1.3595055}
+      - {x: 0.326945, y: 2.3409536}
+      - {x: 0.33315217, y: 2.4692287}
+      - {x: 0.32390398, y: 2.62455}
+      - {x: 0.3094328, y: 2.7829933}
       - {x: 0.31572872, y: 2.863909}
       - {x: -0.26546812, y: 2.8554168}
-      - {x: -0.30993554, y: 2.8319411}
-      - {x: -0.32967106, y: 2.7360783}
-      - {x: -0.3481883, y: 2.588655}
-      - {x: -0.32513797, y: 2.469315}
-      - {x: -0.3161027, y: 1.3665918}
-      - {x: -0.3538161, y: 1.2827872}
-      - {x: -0.55342567, y: 1.1268584}
-      - {x: -0.7259353, y: 0.950593}
-      - {x: -0.84807694, y: 0.7441944}
-      - {x: -0.85758376, y: -2.8982172}
-      - {x: -0.80816376, y: -2.9203587}
-      - {x: 0.83520955, y: -2.9336624}
-      - {x: 0.87616765, y: -2.8855784}
+      - {x: -0.26792252, y: 2.6801646}
+      - {x: -0.27379358, y: 2.5167303}
+      - {x: -0.27018172, y: 2.364467}
+      - {x: -0.26903638, y: 2.2549272}
+      - {x: -0.25596893, y: 1.36285}
+      - {x: -0.358964, y: 1.192927}
+      - {x: -0.5405796, y: 1.0456095}
+      - {x: -0.74179554, y: 0.838489}
+      - {x: -0.7966707, y: 0.719863}
+      - {x: -0.7965805, y: -2.713477}
+      - {x: -0.7515616, y: -2.8748794}
+      - {x: 0.7995577, y: -2.8830316}
+      - {x: 0.8410031, y: -2.811431}
 --- !u!114 &5518964330399862980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa31cff02bd19f4d9750c5818aaf9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxAudioVolume: 0.15
 --- !u!114 &5518964330399863001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -583,3 +565,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1225d64aaa96ebe478b25c35b5e8f79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &492264741
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518964330399863000}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a1457275c5cb0b046982dbce9101cadf, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
