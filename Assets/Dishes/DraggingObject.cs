@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DraggingObject : MonoBehaviour
 {
     DraggingBorder border;
-    AudioSource hitAudio;
+    AudioSource putAudio;
+    AudioSource foamAudio;
+    public float maxFoamingVolume;
 
     public void Awake()
     {
         border = transform.parent.GetComponentInChildren<DraggingBorder>();
-        //hitAudio = transform.parent.GetComponent<AudioSource>();
+        putAudio = GetComponents<AudioSource>()[1];
+        foamAudio = GetComponents<AudioSource>()[2];
+    }
+
+    private void Update()
+    {
+        float foamParticles = (float)GetComponentsInChildren<Particle>().Count(particle => particle.isFoam) / 100 * maxFoamingVolume;
+        foamAudio.volume = Mathf.Min(maxFoamingVolume, foamParticles);
     }
 
     public void OnMouseDown()
@@ -26,6 +36,6 @@ public class DraggingObject : MonoBehaviour
         border.transform.position += new Vector3(0, 0, 5);
         border.dragging = false;
         border.trigger = null;
-        //hitAudio.Play();
+        putAudio.Play();
     }
 }

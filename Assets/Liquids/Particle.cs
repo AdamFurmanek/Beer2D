@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Particle : MonoBehaviour
 
     public ParticleParameters parameters;
 
-    bool isFoam = false;
+    [HideInInspector] public bool isFoam = false;
     bool diffusing = false;
 
     private void Awake()

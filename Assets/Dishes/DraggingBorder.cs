@@ -8,17 +8,22 @@ public class DraggingBorder : MonoBehaviour
 
     DraggingObject mainObject;
     AudioSource hitAudio;
+    AudioSource moveAudio;
     SpriteRenderer spriteRenderer;
     [HideInInspector] public bool dragging;
     [HideInInspector] public Vector2 offset;
     Vector2 lastPosition;
     Quaternion lastRotation;
-    public GameObject trigger;
+    [HideInInspector] public GameObject trigger;
+    bool stoppedFlag;
+    float toScroll;
+    public float movingSpeedAudioTrigger;
 
     private void Awake()
     {
         mainObject = transform.parent.GetComponentInChildren<DraggingObject>();
-        hitAudio = GetComponent<AudioSource>();
+        hitAudio = GetComponents<AudioSource>()[0];
+        moveAudio = GetComponents<AudioSource>()[1];
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         lastPosition = transform.position;
         lastRotation = transform.rotation;
@@ -30,9 +35,6 @@ public class DraggingBorder : MonoBehaviour
             trigger = collision.gameObject;
     }
 
-    bool stoppedFlag;
-
-    float toScroll;
     public void Update()
     {
         if (dragging)
@@ -41,6 +43,10 @@ public class DraggingBorder : MonoBehaviour
                 toScroll = scrollingSpeed;
             if (Input.mouseScrollDelta.y < 0)
                 toScroll = -scrollingSpeed;
+
+            var distance = Vector2.Distance(lastPosition, transform.position);
+            if (distance > movingSpeedAudioTrigger && !moveAudio.isPlaying)
+                moveAudio.Play();
         }
     }
 
@@ -66,6 +72,7 @@ public class DraggingBorder : MonoBehaviour
             {
                 if (stoppedFlag)
                 {
+                    moveAudio.Stop();
                     hitAudio.Play();
                     stoppedFlag = false;
                 }

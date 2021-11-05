@@ -7,8 +7,8 @@ public class Parenting : MonoBehaviour
     private GameObject defaultParent;
     private GameObject specialParent;
 
-    public float maxAudioVolume;
-    private AudioSource pouring;
+    public float maxPouringVolume;
+    private AudioSource pouringAudio;
 
     public void Awake()
     {
@@ -19,20 +19,20 @@ public class Parenting : MonoBehaviour
         inverseScale.x = 1f / transform.localScale.x;
         inverseScale.y = 1f / transform.localScale.y;
         specialParent.transform.localScale = inverseScale;
-        pouring = GetComponent<AudioSource>();
+        pouringAudio = GetComponents<AudioSource>()[0];
     }
 
     void Update()
     {
-        pouring.volume -= Time.deltaTime;
+        pouringAudio.volume -= Time.deltaTime;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Liquid"))
         {
-            pouring.volume += Time.deltaTime * 2;
-            pouring.volume = Mathf.Min(maxAudioVolume, pouring.volume);
+            pouringAudio.volume += Time.deltaTime * 2;
+            pouringAudio.volume = Mathf.Min(maxPouringVolume, pouringAudio.volume);
             collision.transform.SetParent(specialParent.transform);
         }
     }
