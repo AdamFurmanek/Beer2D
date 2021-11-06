@@ -11,7 +11,10 @@ public class SimpleDragging : MonoBehaviour
 
     public void OnMouseDown()
     {
-        offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+        if (Input.GetKey(KeyCode.LeftControl))
+            Destroy(this.gameObject);
+        else
+            offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
     }
 
     public void OnMouseDrag()

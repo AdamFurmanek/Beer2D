@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Particle : MonoBehaviour
 {
-    SpriteRenderer particleRenderer;
-    Rigidbody2D particleRigidbody;
     public ParticleAppearance liquid;
     public ParticleAppearance foam;
-
     public ParticleParameters parameters;
+
+    SpriteRenderer particleRenderer;
+    Rigidbody2D particleRigidbody;
 
     [HideInInspector] public bool isFoam = false;
     bool diffusing = false;

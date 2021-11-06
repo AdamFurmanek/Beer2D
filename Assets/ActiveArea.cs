@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class ActiveArea : MonoBehaviour
 {
-    AudioSource[] pourOnFloorSounds;
     public float intensity;
+
+    AudioSource[] pourOnFloorSounds;
     int lastSound;
 
     public void Awake()

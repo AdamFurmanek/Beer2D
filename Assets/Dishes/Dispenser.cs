@@ -5,38 +5,43 @@ using UnityEngine;
 public class Dispenser : MonoBehaviour
 {
     public GameObject liquid;
-    public GameObject parent;
     public bool enable;
     public float force;
     public float frequency;
     public float maxPouringVolume;
 
-    private bool busy;
-    private AudioSource pouring;
+    bool busy;
+    AudioSource pouring;
+    ActiveArea activeArea;
 
     private void Awake()
     {
         pouring = GetComponent<AudioSource>();
+        activeArea = FindObjectOfType<ActiveArea>();
     }
 
     void Update()
     {
         pouring.volume -= Time.deltaTime;
-        if(enable && Input.GetKey(KeyCode.Space))
+    }
+
+    public void Pour()
+    {
+        if (enable)
         {
             pouring.volume += Time.deltaTime * 2;
             pouring.volume = Mathf.Min(maxPouringVolume, pouring.volume);
             if (!busy)
-                StartCoroutine(Pour());
+                StartCoroutine(PourCRT());
         }
     }
 
-    IEnumerator Pour()
+    IEnumerator PourCRT()
     {
         busy = true;
 
         var go = Instantiate(liquid);
-        go.transform.SetParent(parent.transform);
+        go.transform.SetParent(activeArea.transform);
         go.transform.position = transform.position;
 
         go.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, 0);

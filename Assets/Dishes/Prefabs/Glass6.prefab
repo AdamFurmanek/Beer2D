@@ -212,10 +212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingSpeed: 10
+  movingSpeedAudioTrigger: 10
   dragging: 0
   offset: {x: 0, y: 0}
   trigger: {fileID: 0}
-  movingSpeedAudioTrigger: 10
 --- !u!82 &501939072
 AudioSource:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f75d6d2c13925a64882b641627811960, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
   Loop: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DraggingBorder : MonoBehaviour
 {
     public float scrollingSpeed;
+    public float movingSpeedAudioTrigger;
 
     DraggingObject mainObject;
     AudioSource hitAudio;
@@ -17,7 +18,6 @@ public class DraggingBorder : MonoBehaviour
     [HideInInspector] public GameObject trigger;
     bool stoppedFlag;
     float toScroll;
-    public float movingSpeedAudioTrigger;
 
     private void Awake()
     {

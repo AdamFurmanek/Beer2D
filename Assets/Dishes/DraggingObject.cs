@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class DraggingObject : MonoBehaviour
 {
+    public float maxFoamingVolume;
+
     DraggingBorder border;
     AudioSource putAudio;
     AudioSource foamAudio;
-    public float maxFoamingVolume;
 
     public void Awake()
     {
@@ -31,13 +32,19 @@ public class DraggingObject : MonoBehaviour
         }
         float foamParticles = intensity / 100 * maxFoamingVolume;
         foamAudio.volume = Mathf.Min(maxFoamingVolume, foamParticles);
-        Debug.Log(foamAudio.volume);
     }
 
     public void OnMouseDown()
     {
-        border.offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-        border.dragging = true;
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
+            border.offset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+            border.dragging = true;
+        }
     }
 
     private void OnMouseUp()
