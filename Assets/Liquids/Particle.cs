@@ -15,9 +15,15 @@ public class Particle : MonoBehaviour
     [HideInInspector] public bool isFoam = false;
     bool diffusing = false;
 
+    static int lol = 0;
+
     private void Awake()
     {
-        particleRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        var mask = transform.GetChild(0).GetComponent<SpriteMask>();
+        mask.frontSortingOrder = lol;
+        particleRenderer = transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
+        lol++;
+        particleRenderer.sortingOrder = lol;
         particleRigidbody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(ParticleCRT());
