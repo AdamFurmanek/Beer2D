@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liquid:
-    color: {r: 0.9803922, g: 0.69411767, b: 0.10980393, a: 0.8627451}
+    color: {r: 0.9803922, g: 0.69411767, b: 0.10980393, a: 0.74509805}
     scale: {x: 1, y: 1}
     gravityScale: 5
     linearDrag: 0

@@ -179,7 +179,7 @@ MonoBehaviour:
     linearDrag: 0.3
     angularDrag: 0.3
   parameters:
-    canFoam: 1
+    canFoam: 0
     foamAppearingTime: 0.1
     foamStayTime: 0.1
     foamDissolveTime: 0.1

@@ -9,24 +9,50 @@ public class Particle : MonoBehaviour
     public ParticleAppearance foam;
     public ParticleParameters parameters;
 
+    SpriteMask particleMask;
     SpriteRenderer particleRenderer;
     Rigidbody2D particleRigidbody;
 
     [HideInInspector] public bool isFoam = false;
     bool diffusing = false;
 
-    static int lol = 0;
+    static int maxParticles = 1000;
+    static bool initialized = false;
+    static Queue<int> freeID = new Queue<int>();
 
     private void Awake()
     {
-        var mask = transform.GetChild(0).GetComponent<SpriteMask>();
-        mask.frontSortingOrder = lol;
+        if (!initialized)
+        {
+            for (int i = 0; i < maxParticles; i++)
+                freeID.Enqueue(i);
+
+            initialized = true;
+        }
+
+        if (freeID.Count < 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        int id = freeID.Dequeue();
+
+        particleMask = transform.GetChild(0).GetComponent<SpriteMask>();
+        particleMask.frontSortingOrder = id;
+
         particleRenderer = transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
-        lol++;
-        particleRenderer.sortingOrder = lol;
+        particleRenderer.sortingOrder = id + 1;
+
         particleRigidbody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(ParticleCRT());
+    }
+
+    private void OnDestroy()
+    {
+        if (particleMask != null)
+            freeID.Enqueue(particleMask.frontSortingOrder);
     }
 
     private void SetParameters(ParticleAppearance p)
